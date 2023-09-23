@@ -1,0 +1,72 @@
+.navbar_container{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 20px;
+    background: #f2f2f2;
+    
+}
+.navbar_container >div{
+    display:flex;
+    align-items: center;
+    gap:20px;
+    flex:1;
+}
+.search{
+    display:flex;
+    align-items: center;
+    border:1px solid lightgrey;
+    background: white;
+    padding:2px 4px;
+}
+.search input{
+    border:none;
+    &:focus{
+        outline:none;
+    }
+}
+.logo{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo img{
+    width:20vw;
+}
+.menu{
+    display:flex;
+    justify-content: right;
+    position: relative;
+    z-index:3;
+}
+.menu-btn{
+    border:none;
+    background: transparent;
+    cursor: pointer;
+    padding:0px;
+}
+.visible-dropdownmenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:10px 20px;
+    box-shadow: 2px 2px 2px gray;
+    width:min-content;
+    position:absolute;
+    background:white;
+    top:50px;
+    gap:10px;
+    P{
+        cursor: pointer;
+        padding:10px 10px;
+        width:100%;
+    }
+    p:hover{
+        color:gray;
+        background:#f2f2f2;
+    }
+    
+}
+
+.hidden-dropdownmenu{
+    display: none;
+}

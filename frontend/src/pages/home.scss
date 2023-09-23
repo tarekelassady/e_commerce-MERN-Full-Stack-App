@@ -1,0 +1,51 @@
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.contact{
+    display:flex;
+    justify-content: space-between;
+    background:#f2f2f2;
+    height:75vh;
+
+}
+
+.image{
+    flex:1;
+    background-repeat: no-repeat;
+    background-position: 0px 80%;
+    background-size: cover;
+}
+.contact-info{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    flex:0.5;
+    gap:20px;
+    h2{
+        color:gray;
+        font-size:22px;
+        font-weight: 500;
+    }
+    p{
+        color:#f1655b;
+        font-size:22px;
+    }
+    button{
+        border:none;
+        padding:10px 30px;
+        margin-top:20px;
+        font-size:22px;
+        color:white;
+        background:#f1655b;
+        border-radius:20px 0px 20px 0px;
+        transition:  .25s ease;
+        cursor: pointer;
+        &:hover{
+            background:#ef4b43;
+            border-radius:0px 20px 0px 20px;
+        }
+    }
+}

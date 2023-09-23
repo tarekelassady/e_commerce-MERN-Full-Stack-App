@@ -1,0 +1,18 @@
+.single-product{
+    display: flex;
+    gap:20px;
+    padding:10px 20px;
+    .single-product-images{
+        flex:1;
+        img{
+            width:50vw;
+            object-fit: contain;
+        }
+    }
+    .info{
+        display: flex;
+        flex-direction: column;
+        flex:1;
+        gap:20px;
+    }
+}
