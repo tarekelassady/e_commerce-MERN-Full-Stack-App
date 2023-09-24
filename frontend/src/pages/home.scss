@@ -30,7 +30,7 @@
         font-weight: 500;
     }
     p{
-        color:#f1655b;
+        color: var(--second-color);
         font-size:22px;
     }
     button{
@@ -39,12 +39,12 @@
         margin-top:20px;
         font-size:22px;
         color:white;
-        background:#f1655b;
+        background:var(--second-color);
         border-radius:20px 0px 20px 0px;
         transition:  .25s ease;
         cursor: pointer;
         &:hover{
-            background:#ef4b43;
+            background:var(--light-second-color);
             border-radius:0px 20px 0px 20px;
         }
     }

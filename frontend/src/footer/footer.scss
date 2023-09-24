@@ -115,12 +115,12 @@
             }
             button{
                 flex:1;
-                background:#f1655b;
+                background:var(--second-color);
                 color:white;
                 border:none;
                 cursor: pointer;
                 &:hover{
-                    background:#ef4b43;
+                    background:var(--light-second-color);
                 }
             }
         }

@@ -48,10 +48,10 @@ h3{
         font-size:18px;
         padding:10px 30px;
         // border:none;
-        color:#f1655b;
+        color:var(--second-color);
         cursor:pointer;
         &:hover{
-            color:#ef4b43;
+            color:var(--light-second-color);
         }
     }
 }
