@@ -1,0 +1,116 @@
+.cart{
+    padding:20px;
+}
+
+
+.cart-upper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button{
+        cursor: pointer;
+        border:2px solid var(--second-color);
+        color:var(--second-color);
+        background: none;
+        padding:10px;
+        font-weight: 500;
+
+    }
+    .filled{
+        color:white;
+        background: var(--second-color);
+        &:hover{
+            background: var(--light-second-color);
+        }
+    }
+    .cart-upper-text{
+        display: flex;
+        gap:20px;
+        span{
+            text-decoration: underline;
+        }
+    }
+}
+.cart-lower{
+    display: flex;
+    justify-content: space-between;
+    padding:20px;
+    gap:40px;
+    .cart-product-info{
+        display: flex;
+        flex-direction: column;
+        flex:3;
+        gap:20px;
+        .cart-product-detail{
+            display: flex;
+            justify-content: space-between;
+            gap:20px;
+            img{
+                width:150px;
+            }
+            .cart-product-desc{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                flex:3;
+                strong{
+                    font-weight: 600;
+                }
+                .cart-product-color{
+                    display: flex;
+                    gap:5px;
+                    div{
+                    width:20px;
+                    height:20px;
+                    background-color:lightsalmon;
+                    }
+                    
+                }
+            }
+            .cart-product-price{
+                flex:1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                .cart-product-amount{
+                    display: flex;
+                    gap:10px;
+                }
+                
+            }
+            
+        }
+        hr{
+            background-color:var(--main-border-color);
+            height:1px;
+            border:none;
+        }
+    }
+    
+}
+
+
+.cart-product-summary{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    border:1px solid var(--main-border-color);
+    padding:10px;
+    .cart-product-summary-detail{
+        display: flex;
+        justify-content: space-between;
+        gap:5px;
+    }
+    button{
+        background: var(--second-color);
+        color:white;
+        border: none;
+        padding:10px;
+        font-weight: 500;
+        &:hover{
+            background: var(--light-second-color);
+        }
+    }
+}

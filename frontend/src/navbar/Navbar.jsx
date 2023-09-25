@@ -30,7 +30,7 @@ const Navbar = () => {
         <p>Login</p>
         <p>Register</p>
         <Badge badgeContent={4} color="primary">
-          <ShoppingCartOutlinedIcon />
+          <Link to="/cart"><ShoppingCartOutlinedIcon /></Link>
         </Badge>
         <button className='menu-btn' onClick={isOpened}>{getIsOpened?
         <CloseIcon />:<MenuIcon />}</button>

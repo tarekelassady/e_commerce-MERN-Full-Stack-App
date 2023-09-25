@@ -2,6 +2,7 @@ import './App.css';
 import Announcement from './components/Announcement';
 import Footer from './footer/Footer';
 import Navbar from './navbar/Navbar';
+import Cart from './pages/Cart';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Single_Product from './pages/Single_Product';
@@ -36,6 +37,10 @@ const router=createBrowserRouter([
       {
         path:"/product/:id",
         element:<Single_Product />
+      },
+      {
+        path:"/cart",
+        element:<Cart />
       }
       
       
