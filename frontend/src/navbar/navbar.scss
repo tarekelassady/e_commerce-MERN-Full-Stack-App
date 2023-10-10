@@ -37,6 +37,10 @@
     justify-content: right;
     position: relative;
     z-index:3;
+    .auth{
+        text-decoration: none;
+        color:var(--text-color);
+    }
 }
 .menu-btn{
     border:none;

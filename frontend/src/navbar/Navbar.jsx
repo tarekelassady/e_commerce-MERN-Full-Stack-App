@@ -23,12 +23,12 @@ const Navbar = () => {
         </div>
       </div>
       <div className='logo'>
-        <img src={logo} alt="" />
+        <Link to="/"><img src={logo} alt="" /></Link>
 
       </div>
       <div className='menu'>
-        <p>Login</p>
-        <p>Register</p>
+        <Link className="auth" to="/login">Login</Link>
+        <Link className="auth" to="/register">Register</Link>
         <Badge badgeContent={4} color="primary">
           <Link to="/cart"><ShoppingCartOutlinedIcon /></Link>
         </Badge>

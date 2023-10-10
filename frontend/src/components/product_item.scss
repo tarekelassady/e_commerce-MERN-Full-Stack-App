@@ -1,10 +1,18 @@
 .product{
     // display: flex;
     position:relative;
-    margin:20px;
-    padding:10px;
+    margin:10px;
+    // padding:10px;
     box-shadow: 1px 1px 2px lightgray;
     min-width: 280px;
+    min-height: 280px;
+    img{
+        width:100%;
+        height: 80%;
+        overflow: hidden;
+        max-width: 100%;
+        object-fit: cover;
+    }
     &:hover .action-buttons{
         animation:fade-in 1s ease;
         animation-fill-mode: forwards;

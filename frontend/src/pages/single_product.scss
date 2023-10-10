@@ -2,11 +2,33 @@
     display: flex;
     gap:20px;
     padding:10px 20px;
-    .sp-images{
-        flex:1;
-        img{
-            width:50vw;
+    .sp-imgs{
+        display: flex;
+        flex-direction: column;
+        flex:2;
+        width: 100vw;
+        gap:5px;
+        .sp-featured-img{
+            width:100%;
+            height:70vh;
             object-fit: contain;
+            cursor:zoom-in;
+        }
+        .sp-other-imgs{
+            display: flex;
+            background-color: #eee;
+            height:150px;
+            gap:5px;
+            .sp-img{
+                height: 100%;
+                cursor: pointer;
+                border:4px solid transparent;
+            }
+            .sp-img-selected{
+                // height: 100%;
+                border:4px solid var(--second-color);
+                
+            }
         }
     }
     .sp-info{
@@ -31,6 +53,8 @@
                     width:20px;
                     height:20px;
                     cursor: pointer;
+                    border: 1px solid lightgrey;
+                    color:bur
                 }
             }
             .sp-size-filter{

@@ -1,24 +1,37 @@
 import "./single_product.scss";
 import HomeOffice from "../assets/slider/white-oak-home-office.jpg";
 import { useState } from "react";
-const Single_Product = () => {
+import { useLocation } from "react-router-dom";
+
+const SingleProduct = () => {
     const colors=["black","darkgoldenrod","brown"];
     const [getAmount,setAmount]=useState(0);
+    const location=useLocation();
+    const product=location.state;
+    const [getImg,setImg]=useState(product.imgs && product.imgs.filter(img=>img.featured));
+
   return (
     <div className="single-product">
-      <div className="sp-images">
-        <img src={HomeOffice} alt="" />
+      <div className="sp-imgs">
+        {product.imgs && product.imgs.map(img=>(
+          img.featured && <img className="sp-featured-img" src={getImg[0].url} alt="" />
+        ))}
+        <div className="sp-other-imgs">
+          {product.imgs && product.imgs.map(img=>(
+            <img className={img.url===getImg?"sp-img-selected":"sp-img"} src={img.url} alt="" onClick={e=>setImg(e.target.src)}/>
+          ))}
+        </div>
       </div>
       <div className="sp-info">
-        <h3>Product 1</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat fugiat rem debitis modi illum perferendis commodi unde expedita eius, nemo beatae, doloremque fuga, ratione atque impedit earum! Quidem, exercitationem aperiam.
+        <h3>{product.title}</h3>
+        <p>{product.description}
         </p>
-        <h4>Price <span>$20</span></h4>
+        <h4>Price <span>{`$${product.price}`}</span></h4>
         <div className="sp-filter">
             <div className="sp-color-filter">
                 <h4>Color</h4>
-                {colors.map(color=>(
-                    <div style={{backgroundColor:color}}>
+                {product.colors.map(color=>(
+                    <div title={color} style={{backgroundColor:color}}>
                     </div>
                 ))}
             </div>
@@ -49,4 +62,4 @@ const Single_Product = () => {
   )
 }
 
-export default Single_Product
+export default SingleProduct

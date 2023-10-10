@@ -5,12 +5,15 @@ import Navbar from './navbar/Navbar';
 import Cart from './pages/Cart';
 import Home from './pages/Home';
 import Products from './pages/Products';
-import Single_Product from './pages/Single_Product';
+import SingleProduct from './pages/SingleProduct';
 import Login from "./pages/auth/Login";
 import Register from './pages/auth/Register';
-import {RouterProvider,Outlet, createBrowserRouter} from "react-router-dom";
+import {RouterProvider,Outlet, createBrowserRouter,NavLink,Navigate} from "react-router-dom";
+import PaySuccess from './pages/PaySuccess';
+import Pay from "./pages/Pay";
 
 const Layout=()=>{
+
   return(
     <>
       <Announcement />
@@ -21,7 +24,7 @@ const Layout=()=>{
   )
     
 }
-
+const user=true;
 const router=createBrowserRouter([
   {
     element:<Layout />,
@@ -35,8 +38,12 @@ const router=createBrowserRouter([
         element:<Products />
       },
       {
+        path:"/products/:category",
+        element:<Products />
+      },
+      {
         path:"/product/:id",
-        element:<Single_Product />
+        element:<SingleProduct />
       },
       {
         path:"/cart",
@@ -49,11 +56,19 @@ const router=createBrowserRouter([
 ,
 {
   path:"/login",
-  element:<Login />
+  element:user?<Navigate to="/" replace />:<Login />
 },
 {
   path:"/register",
-  element:<Register />
+  element:user?<Navigate to="/" replace />:<Register />
+},
+{
+  path:"/pay",
+  element:<Pay />
+},
+{
+  path:"/pay_success",
+  element:<PaySuccess />
 }])
 
 

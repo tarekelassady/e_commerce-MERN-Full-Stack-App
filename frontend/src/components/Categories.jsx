@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {categories} from "../data.js";
 import "./categories.scss"
 const Categories = () => {
@@ -13,7 +14,7 @@ const Categories = () => {
                         
                     </div>
                     <div className="link">
-                        <a href="">Shop Now</a>
+                        <Link to={`/products/${category.title.toLowerCase()}`}>Shop Now</Link>
                     </div>
                     
                 </div>
@@ -30,7 +31,7 @@ const Categories = () => {
                         
                     </div>
                     <div className="link">
-                        <a href="">Shop Now</a>
+                       <Link to={`/products/${category.title.toLowerCase()}`}>Shop Now</Link>
                     </div>
                     
                 </div>

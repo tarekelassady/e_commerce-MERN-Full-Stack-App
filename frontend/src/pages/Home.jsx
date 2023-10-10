@@ -6,18 +6,32 @@ import Slider from "../components/slider/Slider"
 import LuxuryCloset from "../assets/luxury-closet-unit.webp"
 import "./home.scss"
 import ProductItem from "../components/Product_Item";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const Home = () => {
+  const [getProducts,setProducts]=useState([]);
+  useEffect(()=>{
+    const fetchProducts=async()=>{
+      try{
+        const res=await axios.get(`http://localhost:4000/products`);
+        setProducts(res.data);
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+    fetchProducts();
+  },[])
   return (
     <div>
       <Slider />
       <Categories />
       {/* products section */}
       <div className="products">
-        {products.map(product=>(
-          <ProductItem product={product} />
-        ))
-        }
-    </div>
+        {getProducts.map(product=>(
+          <ProductItem className="product" product={product} />
+        ))}
+      </div>
     {/* contact section */}
       <div className="contact">
         <div className="image" style={{backgroundImage:`url(${LuxuryCloset})`}}>
