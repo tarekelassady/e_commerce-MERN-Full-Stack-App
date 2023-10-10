@@ -13,7 +13,6 @@ const Products = () => {
   const filter=async(e)=>{
       setSearchParams(prev=>({...prev,[e.target.id]:e.target.value}));
       e.target.id==="color" && setColor(e.target.value.toLowerCase());
-      console.log(e.target.value.toLowerCase()+"  "+e.target.id)
     }
   useEffect(()=>{
     const search=async()=>{
