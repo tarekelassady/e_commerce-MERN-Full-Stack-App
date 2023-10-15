@@ -3,7 +3,7 @@ import HomeOffice from "../assets/slider/white-oak-home-office.jpg";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../redux/cartRedux";
+import { addProduct } from "../redux/cartSlice";
 
 const SingleProduct = () => {
     const colors=["black","darkgoldenrod","brown"];

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 const Cart = () => {
     const cart=useSelector(state=>state.cart);
@@ -38,7 +38,7 @@ const Cart = () => {
     <div className="cart">
       <h2>Your Bag</h2>
       <div className="cart-upper">
-        <button>CONTINUE SHOPPING</button>
+        <Link to="/products"><button>CONTINUE SHOPPING</button></Link>
         <div className="cart-upper-text">
             <span>Shopping Bag ({cart.cartQuantity})</span>
             <span>Your Wishlist (0)</span>
