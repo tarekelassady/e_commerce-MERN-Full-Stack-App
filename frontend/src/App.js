@@ -11,7 +11,10 @@ import Register from './pages/auth/Register';
 import {RouterProvider,Outlet, createBrowserRouter,NavLink,Navigate} from "react-router-dom";
 import PaySuccess from './pages/PaySuccess';
 import Pay from "./pages/Pay";
+import AddProduct from './pages/AddProduct';
 
+
+function App() {
 const Layout=()=>{
 
   return(
@@ -24,7 +27,7 @@ const Layout=()=>{
   )
     
 }
-const user=true;
+const user=false;
 const router=createBrowserRouter([
   {
     element:<Layout />,
@@ -32,6 +35,10 @@ const router=createBrowserRouter([
       {
         path:"/",
         element:<Home />
+      },
+      {
+        path:"/add-product",
+        element:<AddProduct />
       },
       {
         path:"/products",
@@ -72,7 +79,7 @@ const router=createBrowserRouter([
 }])
 
 
-function App() {
+
   return (
     <div className="App">
       <RouterProvider router={router} />

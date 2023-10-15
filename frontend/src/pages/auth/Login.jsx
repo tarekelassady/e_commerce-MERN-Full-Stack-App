@@ -1,12 +1,15 @@
 import "./auth.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgImage from "../../assets/slider/modern-wardrobe.jpg";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { User } from "../../redux/userSlice";
 
 const Login = () => {
   const [getCredentials,setCredentials]=useState({username:"",password:""});
-  
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const handleChanges=(e)=>{
     setCredentials(prev=>({...prev,[e.target.id]:e.target.value}));
   }
@@ -17,7 +20,9 @@ const Login = () => {
       password:getCredentials.password
     });
     try{
-      
+      const {username,email}=res.data;
+      dispatch(User({username,email}));
+      navigate("/");
       console.log(res);
     }catch(err){
       res.status(500).json(err);
@@ -25,7 +30,8 @@ const Login = () => {
     
   }
   return (
-    <div className='user_form' style={{backgroundImage:`url(${bgImage})`}}>
+    // <div className='user_form' style={{backgroundImage:`url(${bgImage})`}}>
+    <div className='user_form'>
       <form action="">
         <div className='user_form_input'>
           <input type="text" id="username" placeholder="Username" value={getCredentials.username} onChange={handleChanges}/>

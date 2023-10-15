@@ -9,11 +9,12 @@ import ProductItem from "../components/Product_Item";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const Home = () => {
+  const backendURL=process.env.REACT_APP_BACKEND_URL;
   const [getProducts,setProducts]=useState([]);
   useEffect(()=>{
     const fetchProducts=async()=>{
       try{
-        const res=await axios.get(`http://localhost:4000/products`);
+        const res=await axios.get(`${backendURL}/products`);
         setProducts(res.data);
       }catch(err){
         console.log(err);

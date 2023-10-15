@@ -27,7 +27,7 @@ app.use("/users",usersController);
 app.use("/products",productsController);
 app.use("/carts",cartsController);
 app.use("/orders",ordersController);
-app.use("/backend/payment",stripeController);
+app.use("/payment",stripeController);
 
 
 const port=process.env.PORT || 8800

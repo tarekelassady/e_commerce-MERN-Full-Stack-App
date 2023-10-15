@@ -7,12 +7,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import {Link} from "react-router-dom";
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [getIsOpened,setIsOpened]=useState(false);
   const isOpened=()=>{
     setIsOpened(!getIsOpened);
   }
+  const username=useSelector(state=>state.user.username);
+  const cartQuantity=useSelector(state=>state.cart.cartQuantity);
+  
   return (
     <div className='navbar_container'>
       <div className='tools'>
@@ -27,10 +31,14 @@ const Navbar = () => {
 
       </div>
       <div className='menu'>
-        <Link className="auth" to="/login">Login</Link>
-        <Link className="auth" to="/register">Register</Link>
-        <Badge badgeContent={4} color="primary">
-          <Link to="/cart"><ShoppingCartOutlinedIcon /></Link>
+        {username?<Link to="">{username}</Link>:
+        <>
+          <Link className="auth" to="/login">Login</Link>
+          <Link className="auth" to="/register">Register</Link>
+        </>
+        }
+        <Badge className="cart-icon" badgeContent={cartQuantity} sx={{"& .MuiBadge-badge": {backgroundColor: 'var(--second-color)'}}} color="primary">
+          <Link to="/cart"><ShoppingCartOutlinedIcon style={{color:'var(--first-color)'}} /></Link>
         </Badge>
         <button className='menu-btn' onClick={isOpened}>{getIsOpened?
         <CloseIcon />:<MenuIcon />}</button>
@@ -44,6 +52,7 @@ const Menu=({opened})=>{
   return(
   <div className={opened?"visible-dropdownmenu":"hidden-dropdownmenu"}>
     <p><Link to="/products">Products</Link></p>
+    <p><Link to="/add-product">Add Product</Link></p>
     <p>About</p>
     <p>Contact</p>
   </div>

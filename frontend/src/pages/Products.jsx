@@ -5,19 +5,22 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const Products = () => {
+  const backendURL=process.env.REACT_APP_BACKEND_URL;
   const location=useLocation();
   const productCat=location.pathname.split("/")[2];
   const [getProducts,setProducts]=useState([]);
   const [getSearchParams,setSearchParams]=useState({color:"",size:""});
   const [getColor,setColor]=useState("");
-  const filter=async(e)=>{
-      setSearchParams(prev=>({...prev,[e.target.id]:e.target.value}));
+
+  const handleFilters=async(e)=>{
+      // setSearchParams(prev=>({...prev,[e.target.id]:e.target.value}));
+      setSearchParams({...getSearchParams,[e.target.id]:e.target.value});
       e.target.id==="color" && setColor(e.target.value.toLowerCase());
     }
   useEffect(()=>{
     const search=async()=>{
       try{
-        const res=await axios.get(`http://localhost:4000/products/category/search?color=${getColor}`)
+        const res=await axios.get(`${backendURL}/products/search?color=${getColor}`)
         setProducts(res.data);
       }catch(err){
       console.log(err);
@@ -29,7 +32,7 @@ const Products = () => {
     const fetchProducts=async()=>{
 
       try{
-        const res=await axios.get(`http://localhost:4000/products/category/${productCat}`)
+        const res=await axios.get(`${backendURL}/products/category/${productCat}`)
         setProducts(res.data);
       }catch(err){
         console.log(err);
@@ -43,7 +46,7 @@ const Products = () => {
         <div className="filter-products">
           <h2>Filter Products</h2>
           <input type="text" className="name" placeholder="Product Name" />
-          <select name="" id="color" onChange={filter}>
+          <select name="" id="color" onChange={handleFilters}>
             <option value="" disabled defaultValue>Color</option>
             <option value="black">Black</option>
             <option value="white">White</option>
@@ -51,7 +54,7 @@ const Products = () => {
             <option value="green">Green</option>
             <option value="blue">Blue</option>
           </select>
-          <select name="size" id="size" onChange={filter}>
+          <select name="size" id="size" onChange={handleFilters}>
             <option value="" disabled defaultValue> Size</option>
             <option value="xl">XL</option>
             <option value="l">L</option>

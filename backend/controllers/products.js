@@ -2,6 +2,7 @@ import express from "express";
 import { verifyAdmin, verifyUser } from "../utils/verifyUser.js";
 import Product from "../models/product.js"
 import product from "../models/product.js";
+import mongoose from "mongoose";
 
 const router=express.Router();
 
@@ -41,7 +42,7 @@ router.delete("/:id",verifyAdmin,async(req,res)=>{
 });
 
 // search
-router.get("/category/search",async(req,res)=>{
+router.get("/search",async(req,res)=>{
     try{
         
         const result=await Product.find({colors:req.query.color});
@@ -101,5 +102,22 @@ router.get("/stats/count-by-category",async(req,res)=>{
         res.status(500).json(err);
     }
 })
+
+// featured
+router.get("/aggr/featured",async(req,res)=>{
+    try{
+        let productId = "652039168957349f9e16e63d";
+        const featured=await Product.aggregate([
+            {$match: { _id: new mongoose.Types.ObjectId(req.query.id) }},
+            {$unwind:"$imgs"},
+            {$group:{_id:"$imgs.featured"}},
+            // {$addFields:{featured:"$_id"}}
+            
+        ])
+        res.status(200).json(featured);
+    }catch(err){
+        res.status(500).json(err);
+    }
+});
 
 export default router;

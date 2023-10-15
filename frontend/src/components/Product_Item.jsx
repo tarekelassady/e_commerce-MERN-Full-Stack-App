@@ -10,7 +10,7 @@ const ProductItem = ({product}) => {
     <div className="products">
           <div className="product" key={product._id}>
             {product.imgs&& product.imgs.map(img=>(
-              img.featured && <img src={img.url} alt={product.title} />
+              img.featured && <img src={img.url} alt={product.title} key={img.url}/>
             ))}
               <div className="action-buttons">
                 <ShoppingCartOutlinedIcon />

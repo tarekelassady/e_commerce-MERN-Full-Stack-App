@@ -2,19 +2,27 @@ import "./single_product.scss";
 import HomeOffice from "../assets/slider/white-oak-home-office.jpg";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../redux/cartRedux";
 
 const SingleProduct = () => {
     const colors=["black","darkgoldenrod","brown"];
-    const [getAmount,setAmount]=useState(0);
+    const [getColor,setColor]=useState("");
+    const [getQuantity,setQuantity]=useState(1);
     const location=useLocation();
     const product=location.state;
-    const [getImg,setImg]=useState(product.imgs && product.imgs.filter(img=>img.featured));
-
+    const [getImg,setImg]=useState(product.imgs && product.imgs.filter(img=>img.featured)[0].url);
+    const dispatch=useDispatch();
+    const cart=useSelector(state=>state.cart);
+    const handleAddToCart=()=>{
+      dispatch(addProduct({...product,color:getColor,quantity:getQuantity,price:product.price}));
+    }
+    console.log(cart);
   return (
     <div className="single-product">
       <div className="sp-imgs">
         {product.imgs && product.imgs.map(img=>(
-          img.featured && <img className="sp-featured-img" src={getImg[0].url} alt="" />
+          img.featured && <img className="sp-featured-img" src={getImg} alt="" />
         ))}
         <div className="sp-other-imgs">
           {product.imgs && product.imgs.map(img=>(
@@ -31,7 +39,7 @@ const SingleProduct = () => {
             <div className="sp-color-filter">
                 <h4>Color</h4>
                 {product.colors.map(color=>(
-                    <div title={color} style={{backgroundColor:color}}>
+                    <div title={color} style={{backgroundColor:color}} onClick={e=>setColor(e.target.title)}>
                     </div>
                 ))}
             </div>
@@ -50,11 +58,11 @@ const SingleProduct = () => {
         
         <div className="sp-actions">
             <div className="add-remove-cart">
-                <button className="remove-button" onClick={()=>{getAmount>0&& setAmount(getAmount-1)}}>-</button>
-                <span className="amount">{getAmount}</span>
-                <button className="add-button" onClick={()=>{setAmount(getAmount+1)}}>+</button>
+                <button className="remove-button" onClick={()=>{getQuantity>1&& setQuantity(getQuantity-1)}}>-</button>
+                <span className="amount">{getQuantity}</span>
+                <button className="add-button" onClick={()=>{setQuantity(getQuantity+1)}}>+</button>
             </div>
-            <button>Add to Cart</button>
+            <button onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
       
