@@ -7,15 +7,27 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import {Link} from "react-router-dom";
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/auth';
+
 
 const Navbar = () => {
   const [getIsOpened,setIsOpened]=useState(false);
   const isOpened=()=>{
     setIsOpened(!getIsOpened);
   }
-  const username=useSelector(state=>state.user.username);
+  const currentUser=useSelector(state=>state.user.currentUser);
   const cartQuantity=useSelector(state=>state.cart.cartQuantity);
+  const dispatch=useDispatch();
+  const handleLogout=(e)=>{
+    e.preventDefault();
+    try{
+      logout(dispatch);
+    }catch(err){
+      console.log(err);
+    }
+
+  }
   
   return (
     <div className='navbar_container'>
@@ -31,7 +43,12 @@ const Navbar = () => {
 
       </div>
       <div className='menu'>
-        {username?<Link to="">{username}</Link>:
+        {currentUser?
+        <>
+          <Link to="">{currentUser.username}</Link>
+          <p className="logout" onClick={handleLogout}>Logout</p>
+        </>
+        :
         <>
           <Link className="auth" to="/login">Login</Link>
           <Link className="auth" to="/register">Register</Link>
@@ -40,8 +57,7 @@ const Navbar = () => {
         <Badge className="cart-icon" badgeContent={cartQuantity} sx={{"& .MuiBadge-badge": {backgroundColor: 'var(--second-color)'}}} color="primary">
           <Link to="/cart"><ShoppingCartOutlinedIcon style={{color:'var(--first-color)'}} /></Link>
         </Badge>
-        <button className='menu-btn' onClick={isOpened}>{getIsOpened?
-        <CloseIcon />:<MenuIcon />}</button>
+        <button className='menu-btn' onClick={isOpened}>{getIsOpened?<CloseIcon />:<MenuIcon />}</button>
         <Menu opened={getIsOpened}/>
       </div>
     </div>

@@ -47,6 +47,14 @@ router.post("/login",async(req,res)=>{
     
 })
 
+//logout
+router.post("/logout",async(req,res,next)=>{
+    res.clearCookie("access_token",{
+        sameSite:"none",
+        secure:true,
+    }).status(200).json("User has been logged out.");
+})
+
 //Update user
 router.put("/:id",verifyUser, async(req,res)=>{
     try{

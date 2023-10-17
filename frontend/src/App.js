@@ -12,6 +12,7 @@ import {RouterProvider,Outlet, createBrowserRouter,NavLink,Navigate} from "react
 import PaySuccess from './pages/PaySuccess';
 import Pay from "./pages/Pay";
 import AddProduct from './pages/AddProduct';
+import { useSelector } from 'react-redux';
 
 
 function App() {
@@ -27,7 +28,7 @@ const Layout=()=>{
   )
     
 }
-const user=false;
+const currentUser=useSelector(state=>state.user.currentUser);
 const router=createBrowserRouter([
   {
     element:<Layout />,
@@ -63,11 +64,11 @@ const router=createBrowserRouter([
 ,
 {
   path:"/login",
-  element:user?<Navigate to="/" replace />:<Login />
+  element:currentUser?<Navigate to="/" replace />:<Login />
 },
 {
   path:"/register",
-  element:user?<Navigate to="/" replace />:<Register />
+  element:currentUser?<Navigate to="/" replace />:<Register />
 },
 {
   path:"/pay",
