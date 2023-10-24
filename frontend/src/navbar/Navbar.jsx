@@ -1,79 +1,109 @@
 import './navbar.scss'
-import SearchIcon from '@mui/icons-material/Search';
 import logo from "../assets/Logo.png";
 import Badge from '@mui/material/Badge';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import {Link} from "react-router-dom";
+// import {Search,ShoppingCartOutlined,Menu,Close} from '@mui/icons-material';
+import { Link, useLocation } from "react-router-dom";
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/auth';
+import { AiOutlineShoppingCart, AiOutlineSearch, AiOutlineMenu, AiOutlineClose, AiOutlineHeart } from "react-icons/ai"
 
 
 const Navbar = () => {
-  const [getIsOpened,setIsOpened]=useState(false);
-  const isOpened=()=>{
+  const [getIsOpened, setIsOpened] = useState(false);
+  const [getIsSticky, setIsSticky] = useState(false);
+  const [getActiveMenuItem, setActiveMenuItem] = useState(0);
+  const [getShowSearch, setShowSearch] = useState(false);
+
+  const isOpened = () => {
     setIsOpened(!getIsOpened);
   }
-  const currentUser=useSelector(state=>state.user.currentUser);
-  const cartQuantity=useSelector(state=>state.cart.cartQuantity);
-  const dispatch=useDispatch();
-  const handleLogout=(e)=>{
+  const location = useLocation();
+  const currentUser = useSelector(state => state.user.currentUser);
+  const cartQuantity = useSelector(state => state.cart.cartQuantity);
+  const wishlistQuantity = useSelector(state => state.wishlist.wishlistQuantity);
+  const dispatch = useDispatch();
+
+  const handleAddToWishlist = () => {
+    // dispatch(addProduct({...product,color:getColor,quantity:getQuantity,price:product.price}));
+  }
+  const handleAddToCart = () => {
+    // dispatch(addProduct({...product,color:getColor,quantity:getQuantity,price:product.price}));
+  }
+
+
+  const handleLogout = (e) => {
     e.preventDefault();
-    try{
+    try {
       logout(dispatch);
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
 
   }
-  
+
+  // window.addEventListener("scroll",()=>{
+  //   if(window.scrollY>70){
+  //     setIsSticky(true);
+  //   }else{
+  //     setIsSticky(false);
+  //   }
+  // })
   return (
-    <div className='navbar_container'>
-      <div className='tools'>
-        <p className='language'>EN</p>
-        <div className='search'>
-          <input type="text" />
-          <SearchIcon style={{color:"grey",fontSize:"16px"}} />
+    <>
+      <div className='navbar_container' style={{ position: getIsSticky ? "fixed" : "", top: 0 }}>
+        <div className='logo'>
+          <Link to="/"><img src={logo} alt="" /></Link>
+        </div>
+        <div className='menu'>
+          {currentUser ?
+            <>
+              <Link className="auth" to="/profile">{currentUser.username}</Link>
+              <p className="auth" onClick={handleLogout}>Logout</p>
+            </>
+            :
+            <>
+              <Link className="auth" to="/login" state={location}>Login</Link>
+              <Link className="auth" to="/register">Register</Link>
+            </>
+          }
+          <p className='language'>EN</p>
+          <AiOutlineSearch style={{ color: 'var(--first-color)', fontSize: "24px", cursor: "pointer" }} onClick={() => setShowSearch(!getShowSearch)} />
+          <Badge className="wishlist-icon" badgeContent={wishlistQuantity} sx={{ "& .MuiBadge-badge": { backgroundColor: 'var(--second-color)' } }} color="primary">
+            <Link to="/"><AiOutlineHeart style={{ color: 'var(--first-color)', fontSize: "24px" }} /></Link>
+          </Badge>
+          <Badge className="cart-icon" badgeContent={cartQuantity} sx={{ "& .MuiBadge-badge": { backgroundColor: 'var(--second-color)' } }} color="primary">
+            <Link to="/cart"><AiOutlineShoppingCart style={{ color: 'var(--first-color)', fontSize: "24px" }} /></Link>
+          </Badge>
+          <button className='menu-btn' onClick={isOpened}>{getIsOpened ? <AiOutlineClose style={{ fontSize: "24px" }} /> : <AiOutlineMenu style={{ fontSize: "24px" }} />}</button>
+          <DropDownMenu opened={getIsOpened} setIsOpened={setIsOpened} setActiveMenuItem={setActiveMenuItem} getActiveMenuItem={getActiveMenuItem} />
         </div>
       </div>
-      <div className='logo'>
-        <Link to="/"><img src={logo} alt="" /></Link>
+      {
+        getShowSearch ?
+          <div className='search'>
+            <div className='search-input'>
+              <input type="text" />
+              <AiOutlineSearch style={{ color: "grey", fontSize: "16px" }} />
+            </div>
+          </div> :
+          <></>
+      }
+    </>
+  )
 
-      </div>
-      <div className='menu'>
-        {currentUser?
-        <>
-          <Link to="">{currentUser.username}</Link>
-          <p className="logout" onClick={handleLogout}>Logout</p>
-        </>
-        :
-        <>
-          <Link className="auth" to="/login">Login</Link>
-          <Link className="auth" to="/register">Register</Link>
-        </>
-        }
-        <Badge className="cart-icon" badgeContent={cartQuantity} sx={{"& .MuiBadge-badge": {backgroundColor: 'var(--second-color)'}}} color="primary">
-          <Link to="/cart"><ShoppingCartOutlinedIcon style={{color:'var(--first-color)'}} /></Link>
-        </Badge>
-        <button className='menu-btn' onClick={isOpened}>{getIsOpened?<CloseIcon />:<MenuIcon />}</button>
-        <Menu opened={getIsOpened}/>
-      </div>
+}
+const DropDownMenu = ({ opened, setIsOpened, setActiveMenuItem, getActiveMenuItem }) => {
+  console.log(getActiveMenuItem)
+  return (
+    <div className={opened ? "visible-dropdownmenu" : "hidden-dropdownmenu"}>
+      <Link to="/products" className={getActiveMenuItem === 1 ? "active-menu-item" : "inactive-menu-item"} onClick={() => { setActiveMenuItem(1); setIsOpened(false); }}>Products</Link>
+      <Link to="/add-product" className={getActiveMenuItem === 2 ? "active-menu-item" : "inactive-menu-item"} onClick={() => { setActiveMenuItem(2); setIsOpened(false); }}>Add Product</Link>
+      <Link to="/" className={getActiveMenuItem === 3 ? "active-menu-item" : "inactive-menu-item"} onClick={() => { setActiveMenuItem(3); setIsOpened(false); }}>About</Link>
+      <Link to="/" className={getActiveMenuItem === 4 ? "active-menu-item" : "inactive-menu-item"} onClick={() => { setActiveMenuItem(4); setIsOpened(false); }}>Contact</Link>
     </div>
   )
-  
 }
-const Menu=({opened})=>{
-  return(
-  <div className={opened?"visible-dropdownmenu":"hidden-dropdownmenu"}>
-    <p><Link to="/products">Products</Link></p>
-    <p><Link to="/add-product">Add Product</Link></p>
-    <p>About</p>
-    <p>Contact</p>
-  </div>
-  )
-}
-  
+
 
 export default Navbar

@@ -12,21 +12,22 @@ const SingleProduct = () => {
     const location=useLocation();
     const product=location.state;
     const [getImg,setImg]=useState(product.imgs && product.imgs.filter(img=>img.featured)[0].url);
-    const dispatch=useDispatch();
     const cart=useSelector(state=>state.cart);
+    const dispatch=useDispatch();
+
     const handleAddToCart=()=>{
       dispatch(addProduct({...product,color:getColor,quantity:getQuantity,price:product.price}));
     }
-    console.log(cart);
+    
   return (
     <div className="single-product">
       <div className="sp-imgs">
         {product.imgs && product.imgs.map(img=>(
-          img.featured && <img className="sp-featured-img" src={getImg} alt="" />
+          img.featured && <img className="sp-featured-img" key={getImg} src={getImg} alt="" />
         ))}
         <div className="sp-other-imgs">
           {product.imgs && product.imgs.map(img=>(
-            <img className={img.url===getImg?"sp-img-selected":"sp-img"} src={img.url} alt="" onClick={e=>setImg(e.target.src)}/>
+            <img className={img.url===getImg?"sp-img-selected":"sp-img"} key={img.url} src={img.url} alt="" onClick={e=>setImg(e.target.src)}/>
           ))}
         </div>
       </div>
@@ -39,7 +40,7 @@ const SingleProduct = () => {
             <div className="sp-color-filter">
                 <h4>Color</h4>
                 {product.colors.map(color=>(
-                    <div title={color} style={{backgroundColor:color}} onClick={e=>setColor(e.target.title)}>
+                    <div title={color} style={{backgroundColor:color}} key={color} onClick={e=>setColor(e.target.title)}>
                     </div>
                 ))}
             </div>

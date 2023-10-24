@@ -1,6 +1,6 @@
 import "./products.scss";
 import { products } from "../data";
-import ProductItem from "../components/Product_Item";
+import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -30,9 +30,14 @@ const Products = () => {
   },[getColor])
   useEffect(()=>{
     const fetchProducts=async()=>{
-
+      let url="";
       try{
-        const res=await axios.get(`${backendURL}/products/category/${productCat}`)
+        if(productCat){
+          url=`${backendURL}/products/category/${productCat}`;
+        }else{
+          url=`${backendURL}/products`
+        }
+        const res=await axios.get(url);
         setProducts(res.data);
       }catch(err){
         console.log(err);
@@ -74,7 +79,7 @@ const Products = () => {
       </div>
       <div className="products">
         {getProducts.map(product=>(
-          <ProductItem key={product._id} product={product}/>
+          <ProductCard key={product._id} product={product}/>
         ))}
         
 

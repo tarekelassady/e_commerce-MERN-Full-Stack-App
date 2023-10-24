@@ -1,0 +1,4 @@
+add popup product from product card 05:45:00 part1
+counter down for Events component 06:26:00 part1
+sorting and filtering array 07:02:30 part1
+best selling page 07:08:30 part1

@@ -4,11 +4,22 @@
     justify-content: center; 
     width:100vw;
     height:100vh;
-    gap:30px;
     background:radial-gradient(rgba(0,0,0,0.8),rgba(0,0,0,1));
     form{
         background:rgb(40,40,40);
-        padding:30px;
+        padding:20px 0px;
+        // width:max-content;
+        width:40%;
+        gap:20px;
+        p{
+            color:white;
+            overflow-wrap:break-word;
+            text-align: center;
+            padding:10px;
+            width:100%;
+            text-wrap:wrap;
+        }
+        
     }
 }
 .user_form_input{
@@ -28,12 +39,42 @@
     color:white;
     outline:none;
     &:hover{
-        background-color: var(--light-first-color);
+        background-color: rgb(77, 77, 77);
     }
     /* &:focus{
         border:none;
         border-bottom: 2px solid var(--second-color);
     } */
+}
+.password,.confirm-password{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.show-pwd,.hide-pwd{
+    position: absolute;
+    z-index: 999;
+    right:0;
+    margin-right:10px;
+    cursor: pointer;
+}
+.confirm-pwd{
+    position: absolute;
+    z-index: 999;
+    right:0;
+    margin-right:40px;
+}
+.remember-me{
+    display:flex;
+    align-items: center;
+    font-size: 14px;
+    color:var(--light-first-color);
+    justify-content: start;
+    gap:10px;
+    padding:0px 10px;
+    input[type="checkbox"]{
+        accent-color: var(--second-color);
+    }
 }
 .user_form_action_buttons{
     display: flex;
@@ -48,18 +89,13 @@
     border:none;
     padding:5px 20px;
     &:hover{
-        background-color: var(--light-first-color);
+        background-color: rgb(77, 77, 77);
     };
     &:disabled{
         cursor: not-allowed;
     };
 }
-.user_form p{
-    color:white;
-    overflow-wrap:break-word;
-    text-align: center;
-    padding:10px;
-}
+
 .error_message{
     color:var(--error-color)!important;
 }

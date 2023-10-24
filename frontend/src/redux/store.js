@@ -1,10 +1,39 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore,combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
-import cartReducer from "./cartSlice"
+import cartReducer from "./cartSlice";
+import wishlistReducer from "./wishlistSlice";
 
-export default configureStore({
-    reducer:{
-        user: userReducer,
-        cart: cartReducer,
-    }
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+  } from 'redux-persist'
+  import storage from 'redux-persist/lib/storage'
+
+  const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage,
+  }
+  const rootReducers=combineReducers({user:userReducer,cart:cartReducer,wishlist:wishlistReducer});
+  
+  const persistedReducer = persistReducer(persistConfig, rootReducers)
+
+  
+export const store= configureStore({
+    reducer:persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+
+export let persistor = persistStore(store)

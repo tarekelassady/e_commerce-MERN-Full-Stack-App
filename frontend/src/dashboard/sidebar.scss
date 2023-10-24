@@ -1,0 +1,21 @@
+.sidebar{
+    height: calc(100vh - 50px);
+    padding:20px;
+    // border-right: 1px solid lightgray;
+    box-shadow: 1px 0px 15px -10px rgba(0,0,0,.75) ;
+}
+.dbList{
+    list-style: none;
+    padding:5px;
+    color:var(--first-color)
+}
+.dbListItem{
+    display: flex;
+    gap:5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    padding:5px 10px;
+}
+.dbListItem.active,.dbListItem:hover{
+    background-color: #eee;
+}

@@ -5,7 +5,7 @@ import {products} from "../data.js";
 import Slider from "../components/slider/Slider"
 import LuxuryCloset from "../assets/luxury-closet-unit.webp"
 import "./home.scss"
-import ProductItem from "../components/Product_Item";
+import ProductCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const Home = () => {
@@ -26,11 +26,11 @@ const Home = () => {
   return (
     <div>
       <Slider />
-      <Categories />
+      <Categories className="categories"/>
       {/* products section */}
       <div className="products">
         {getProducts.map(product=>(
-          <ProductItem className="product" product={product} />
+          <ProductCard className="product" key={product._id} product={product} />
         ))}
       </div>
     {/* contact section */}
