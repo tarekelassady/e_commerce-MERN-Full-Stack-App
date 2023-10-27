@@ -37,7 +37,7 @@ app.use("/payment", stripeController);
 app.use("/uploads", express.static("uploads"));
 
 
-const port = process.env.PORT || 8800
+const port = process.env.PORT || 5000
 const server = app.listen(port, () => {
   connectDB();
   console.log("Connected to backend!")
