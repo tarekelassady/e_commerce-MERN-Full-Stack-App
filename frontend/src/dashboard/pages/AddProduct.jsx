@@ -1,39 +1,53 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import "./add_product.scss"
+import ProductVariables from './ProductVariables';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { AiOutlinePlus, AiOutlineSave } from "react-icons/ai";
 
 const AddProduct = () => {
-    
-  const [getColor,setColor]=useState("red");
-  const [getImages,setImages]=useState([]);
-  const [getFeatured,setFeatured]=useState([false,false]);
-  const [getImgs,setImgs]=useState([]);
-  const [getVariables,setVariables]=useState(null);
-
-
-
-  const handlUploadImage=(e)=>{
-    setImages([...e.target.files])
-    // const imgs=[];
-    // getImages.forEach(image=>imgs.push({url:URL.createObjectURL(image),featured:true}));
-    // featured.forEach((feature,i)=>imgs.forEach((img,imgIndex)=>i===imgIndex&&imgs.splice(i,1,{...img,featured:feature})))
-    
-    
-  }
-  useEffect(()=>{
-    // setImgs(getImages.map((img,i)=>({url:URL.createObjectURL(img),featured:getFeatured[i]})))
-    setVariables({color:getColor,imgs:getImages.map((img,i)=>({url:URL.createObjectURL(img),featured:getFeatured[i]}))})
-    
-  },[getImages]);
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
+  const [getTitle, setTitle] = useState("");
+  const [getDescription, setDescription] = useState("");
+  const [getProductVariables, setProductVariables] = useState([]);
 
   
-  console.log(getVariables);
+  const addProductVariables = () => {
+    setProductVariables(prev => [...prev, { id: Date.now(), color: "" }]);
+  }
+
+
+  const addProduct = async () => {
+    const variablesToSave = getProductVariables.filter(variable => variable.color);//exclude empty ProductVariables
+    try {
+      const res = await axios.post(`${backendURL}/products`, {
+        title: getTitle,
+        description: getDescription,
+        categories: ["closets"],
+        variables: variablesToSave,
+      })
+      toast.success("The product has been saved successfully")
+    } catch (err) {
+      toast.error(err.response.message);
+    }
+  }
+
+  // useEffect(()=>{
+  //   console.log(getProductVariables);
+  // },[getProductVariables])
+
   return (
-    <div>
-      <label htmlFor="upload-image">Upload file</label>
-      <input type="file" multiple id="upload-image" accept=".jpg,.webp" onChange={handlUploadImage}/>
-      {getVariables&&getVariables.imgs.map(image=>(
-        <img src={image.url} />
-      ))}
+    <div className='add-product'>
+      <input type="text" id="title" placeholder="Product Title" value={getTitle} onChange={(e) => setTitle(e.target.value)} />
+      <textarea type="text" id="description" placeholder="Product Description" value={getDescription} onChange={(e) => setDescription(e.target.value)} />
+      <div className='add-product-variables'>
+        {getProductVariables && getProductVariables.map((item) => (
+          <ProductVariables key={item.id} id={item.id} setProductVariables={setProductVariables} getProductVariables={getProductVariables} />
+        ))}
+        <AiOutlinePlus className="btn-add" onClick={addProductVariables} />
+      </div>
+      <button className="btn-add-product" onClick={addProduct} disabled={!getTitle || !getDescription} >Add Product <AiOutlineSave /></button>
     </div>
   )
 }

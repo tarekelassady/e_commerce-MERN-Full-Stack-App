@@ -3,8 +3,7 @@
     justify-content: space-between;
     // flex-wrap: wrap; /*use this to wrap any number of items according to the width or screen and width of single item */
     padding:0px 5px;
-    height:50vh;
-    
+    height:50vh;   
 }
 .category{
     display:flex;
@@ -14,7 +13,8 @@
     flex:1;
     background-size:cover;
     margin:5px;
-    box-shadow: 1px 1px 2px lightgray;
+    box-shadow: 0px 2px 2px #c2c4c4;
+    border-radius: 10px;
     
 }
 .category:hover .info{

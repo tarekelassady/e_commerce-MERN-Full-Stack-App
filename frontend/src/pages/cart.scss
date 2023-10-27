@@ -89,20 +89,3 @@
         gap:5px;
     }
 }
-//Buttons
-button{
-    cursor: pointer;
-    border:2px solid var(--second-color);
-    color:var(--second-color);
-    background: none;
-    padding:10px;
-    font-weight: 500;
-
-}
-.filled{
-    color:white;
-    background: var(--second-color);
-    &:hover{
-        background: var(--light-second-color);
-    }
-}

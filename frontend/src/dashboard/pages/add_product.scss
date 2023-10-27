@@ -1,0 +1,134 @@
+.add-product {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 20px;
+    input,textarea{
+        outline: none;
+        border: 1px solid var(--light-first-color);
+        border-radius: 5px;
+    }
+}
+
+.add-product-variables {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.product-variable-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    border: 1px solid var(--light-first-color);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn-delete,
+.btn-save,
+.btn-saved,
+.btn-add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    fill: var(--first-color);
+    opacity: .8;
+    cursor: pointer;
+    &:hover {
+        fill: var(--second-color);
+    }
+}
+
+.btn-save{
+    right: 24px;
+    animation: fade-in-out 2s infinite ease-in-out;
+}
+
+.btn-saved {
+    right:24px;
+    cursor: not-allowed;
+    fill: gainsboro;
+    &:hover{
+        fill:gainsboro;
+    }
+}
+
+.btn-add{
+    position:static;
+    align-self: center;
+}
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .colors {
+        display: flex;
+        height: 24px;
+        border: 1px solid var(--light-first-color);
+        width: max-content;
+
+        .preview-color {
+            border-right: 1px solid var(--light-first-color);
+        }
+
+        .select-color {
+            outline: none;
+            border: none;
+        }
+    }
+
+    input {
+        outline: none;
+        border: 1px solid var(--light-first-color);
+    }
+}
+
+.upload-images {
+    display: flex;
+    gap: 10px;
+}
+
+.preview-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    // height:150px;
+}
+
+.preview-image {
+    position: relative;
+    display: flex;
+    height: 150px;
+
+    img {
+        height: 100%;
+    }
+
+    .select-featured-image {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        bottom: 0;
+        left: 0;
+        padding: 0px 8px;
+        font-size: 14px;
+        background: var(--light-first-color);
+        opacity: .9;
+        color: var(--first-color);
+
+    }
+
+}
+
+@keyframes fade-in-out {
+    0%,100% { opacity: .3 }
+    30%,40%,50%,60%,70% { opacity: 1 }
+  }

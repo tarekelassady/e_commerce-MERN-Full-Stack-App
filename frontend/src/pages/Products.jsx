@@ -15,7 +15,7 @@ const Products = () => {
   const handleFilters=async(e)=>{
       // setSearchParams(prev=>({...prev,[e.target.id]:e.target.value}));
       setSearchParams({...getSearchParams,[e.target.id]:e.target.value});
-      e.target.id==="color" && setColor(e.target.value.toLowerCase());
+      e.target.id==="color" && setColor(e.target.value);
     }
   useEffect(()=>{
     const search=async()=>{
@@ -53,11 +53,11 @@ const Products = () => {
           <input type="text" className="name" placeholder="Product Name" />
           <select name="" id="color" onChange={handleFilters}>
             <option value="" disabled defaultValue>Color</option>
-            <option value="black">Black</option>
-            <option value="white">White</option>
-            <option value="brown">Brown</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Brown">Brown</option>
+            <option value="Green">Green</option>
+            <option value="Blue">Blue</option>
           </select>
           <select name="size" id="size" onChange={handleFilters}>
             <option value="" disabled defaultValue> Size</option>

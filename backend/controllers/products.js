@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 const router=express.Router();
 
 // Create product
-router.post("/",verifyAdmin,async(req,res)=>{
+router.post("/",async(req,res)=>{
     try{
         const newProduct= new Product(req.body);
         const createProduct=await newProduct.save();
@@ -19,7 +19,7 @@ router.post("/",verifyAdmin,async(req,res)=>{
 });
 
 //Updae product
-router.put("/:id",verifyUser,async(req,res)=>{
+router.put("/:id",async(req,res)=>{
     try{
         const updateProduct= await Product.findByIdAndUpdate(
         req.params.id,
@@ -44,8 +44,7 @@ router.delete("/:id",verifyAdmin,async(req,res)=>{
 // search
 router.get("/search",async(req,res)=>{
     try{
-        
-        const result=await Product.find({colors:req.query.color});
+        const result=await Product.find({"variables.color":req.query.color});
         res.status(200).json(result);
     }catch(err){
         res.status(500).json(err);

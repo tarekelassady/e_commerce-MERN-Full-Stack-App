@@ -68,14 +68,14 @@ const Navbar = () => {
             </>
           }
           <p className='language'>EN</p>
-          <AiOutlineSearch style={{ color: 'var(--first-color)', fontSize: "24px", cursor: "pointer" }} onClick={() => setShowSearch(!getShowSearch)} />
+          <AiOutlineSearch style={{ color: 'var(--text-color)', fontSize: "24px", cursor: "pointer" }} onClick={() => setShowSearch(!getShowSearch)} />
           <Badge className="wishlist-icon" badgeContent={wishlistQuantity} sx={{ "& .MuiBadge-badge": { backgroundColor: 'var(--second-color)' } }} color="primary">
-            <Link to="/"><AiOutlineHeart style={{ color: 'var(--first-color)', fontSize: "24px" }} /></Link>
+            <Link to="/"><AiOutlineHeart style={{ color: 'var(--text-color)', fontSize: "24px" }} /></Link>
           </Badge>
           <Badge className="cart-icon" badgeContent={cartQuantity} sx={{ "& .MuiBadge-badge": { backgroundColor: 'var(--second-color)' } }} color="primary">
-            <Link to="/cart"><AiOutlineShoppingCart style={{ color: 'var(--first-color)', fontSize: "24px" }} /></Link>
+            <Link to="/cart"><AiOutlineShoppingCart style={{ color: 'var(--text-color)', fontSize: "24px" }} /></Link>
           </Badge>
-          <button className='menu-btn' onClick={isOpened}>{getIsOpened ? <AiOutlineClose style={{ fontSize: "24px" }} /> : <AiOutlineMenu style={{ fontSize: "24px" }} />}</button>
+          <button className='btn-dropdown-menu' onClick={isOpened}>{getIsOpened ? <AiOutlineClose style={{ color: 'var(--text-color)', fontSize: "24px" }}/> : <AiOutlineMenu style={{ color: 'var(--text-color)', fontSize: "24px" }} />}</button>
           <DropDownMenu opened={getIsOpened} setIsOpened={setIsOpened} setActiveMenuItem={setActiveMenuItem} getActiveMenuItem={getActiveMenuItem} />
         </div>
       </div>
@@ -84,7 +84,7 @@ const Navbar = () => {
           <div className='search'>
             <div className='search-input'>
               <input type="text" />
-              <AiOutlineSearch style={{ color: "grey", fontSize: "16px" }} />
+              <AiOutlineSearch style={{ color: "var(--text-color)", fontSize: "16px" }} />
             </div>
           </div> :
           <></>

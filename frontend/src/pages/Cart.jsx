@@ -43,7 +43,7 @@ const Cart = () => {
             <span>Shopping Bag ({cart.cartQuantity})</span>
             <span>Your Wishlist (0)</span>
         </div>
-        <button className="filled">CHECKOUT</button>
+        <button>CHECKOUT</button>
       </div>
       <div className="cart-lower">
             

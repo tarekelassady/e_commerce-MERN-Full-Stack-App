@@ -120,6 +120,7 @@
                 border:none;
                 cursor: pointer;
                 padding:3px 3px 0px;
+                border-radius: 0;
                 &:hover{
                     background:var(--light-second-color);
                 }
