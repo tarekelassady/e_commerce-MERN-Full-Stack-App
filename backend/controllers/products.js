@@ -44,7 +44,12 @@ router.delete("/:id",verifyAdmin,async(req,res)=>{
 // search
 router.get("/search",async(req,res)=>{
     try{
-        const result=await Product.find({"variables.color":req.query.color});
+        const result=await Product.find({
+            title:{'$regex':req.query.title,"$options":"i"},
+            "variables.color":{'$regex':req.query.color,"$options":"i"},
+            // category:{'$regex':req.query.category,'$options':"i"},
+            // featured:{'$in': [req.query.featured,true]}
+        });
         res.status(200).json(result);
     }catch(err){
         res.status(500).json(err);
