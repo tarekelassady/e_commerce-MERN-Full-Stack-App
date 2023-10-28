@@ -1,6 +1,6 @@
 # Getting Started with Hexa E-Commerce App
 
-Test the app here https://hexa-jvc1.onrender.com/projects
+Test the app here https://hexa-ecommerce-5mdb.onrender.com/
 
 This project is a demo for developming a full-stack MERN web app
 
