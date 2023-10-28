@@ -23,7 +23,7 @@ const connectDB = async () => {
 }
 app.use(cors(
   {
-    origin: "https://hexa-ecommerce-5mdb.onrender.com/",
+    origin: "https://hexa-ecommerce-5mdb.onrender.com",
     credentials: true
   }
 ));
