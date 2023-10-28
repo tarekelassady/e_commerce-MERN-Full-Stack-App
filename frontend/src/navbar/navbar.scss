@@ -75,6 +75,7 @@
     top: 40px;
     gap: 10px;
     overflow:hidden;
+    border-radius:10px;
 
     * {
         cursor: pointer;
@@ -88,7 +89,7 @@
         color: var(--first-color);
         font-weight: 500;
     }
-    
+
 
 }
 

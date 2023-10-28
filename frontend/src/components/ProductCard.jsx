@@ -5,16 +5,24 @@ import "./product_card.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AiFillHeart, AiOutlineHeart, AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { addWishlist } from "../redux/wishlistSlice.js";
 
 const ProductCard = ({ product }) => {
   const [getWishlist, setWishlist] = useState(false);
+  const dispatch = useDispatch();
 
+  const handleAddToWishlist = () => {
+    setWishlist(!getWishlist);
+    dispatch(addWishlist(product));
+  }
   return (
     <div className="product" key={product._id}>
       <Link to={`/product/${product.title.replace(/\s+/g, '-').toLowerCase()}`} state={product}><div className="product-details">
         {product.variables.length > 0 && product.variables[0].imgs.map(img => (
           img.featured && <img src={img.url} alt={product.title} key={img.url} />
         ))}
+        <div className="overlay"></div>
         <div className="title">
           {/* <AiOutlineShoppingCart style={{ fontSize: "18px" }} />
           <Link to={`/product/${product.title.replace(/\s+/g, '-').toLowerCase()}`} state={product}><AiOutlineEye style={{ fontSize: "18px" }} /></Link>
@@ -22,13 +30,13 @@ const ProductCard = ({ product }) => {
             <AiFillHeart style={{ fill: "red", fontSize: "18px" }} onClick={() => { setWishlist(!getWishlist) }} /> :
             <AiOutlineHeart style={{ fontSize: "18px" }} onClick={() => { setWishlist(!getWishlist) }} />
           } */}
-        <h3>{product.title.length > 40 ? product.title.slice(0, 40) + "..." : product.title}</h3>
+          <h3>{product.title.length > 40 ? product.title.slice(0, 40) + "..." : product.title}</h3>
         </div>
       </div></Link>
       <div className="wishlist-actions">
         {getWishlist ?
-          <AiFillHeart style={{ fill: "red", fontSize: "20px" }} onClick={() => { setWishlist(!getWishlist) }} /> :
-          <AiOutlineHeart className="remove-from-wishlist" style={{ fill: "var(--light-first-color)", fontSize: "20px" }} onClick={() => { setWishlist(!getWishlist) }} />
+          <AiFillHeart style={{ fill: "red", fontSize: "20px" }} onClick={()=>setWishlist(!getWishlist)} /> :
+          <AiOutlineHeart className="remove-from-wishlist" style={{ fill: "var(--light-first-color)", fontSize: "20px" }} onClick={handleAddToWishlist} />
         }
       </div>
     </div>
