@@ -8,10 +8,11 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineEye, AiOutlineShoppingCart } from
 
 const ProductCard = ({ product }) => {
   const [getWishlist, setWishlist] = useState(false);
+  // console.log(product.title, product.variables[0].imgs);
   return (
     <div className="products">
       <div className="product" key={product._id}>
-        {product.imgs && product.imgs.map(img => (
+        {product.variables.length>0 && product.variables[0].imgs.map(img => (
           img.featured && <img src={img.url} alt={product.title} key={img.url} />
         ))}
         <div className="action-buttons">
