@@ -1,5 +1,7 @@
 # Getting Started with Hexa E-Commerce App
 
+Test the app here https://hexa-jvc1.onrender.com/projects
+
 This project is a demo for developming a full-stack MERN web app
 
 Mainly, I've developed this full-stack app using React, Express, Node.js & MONGODB
