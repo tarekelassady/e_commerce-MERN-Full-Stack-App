@@ -27,8 +27,8 @@ const ProductCard = ({ product }) => {
       </div></Link>
       <div className="wishlist-actions">
         {getWishlist ?
-          <AiFillHeart style={{ fill: "red", fontSize: "30px" }} onClick={() => { setWishlist(!getWishlist) }} /> :
-          <AiOutlineHeart className="remove-from-wishlist" style={{ fill: "var(--light-first-color)", fontSize: "30px" }} onClick={() => { setWishlist(!getWishlist) }} />
+          <AiFillHeart style={{ fill: "red", fontSize: "20px" }} onClick={() => { setWishlist(!getWishlist) }} /> :
+          <AiOutlineHeart className="remove-from-wishlist" style={{ fill: "var(--light-first-color)", fontSize: "20px" }} onClick={() => { setWishlist(!getWishlist) }} />
         }
       </div>
     </div>
