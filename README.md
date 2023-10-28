@@ -17,10 +17,11 @@ Home, Login, Register, Products, Single Product, Cart, Wishlist, Checkout
 Navbar, Footer, Slider, Categories, ProductCard
 #### Dashboard:
 Statistics, Edit Users, Edit Products, Orders
+
 ## Backend (backend folder):
 ### Structure
 The backend is developed using Express (middleware) and the MONGODB database and it consists of
 ### Dependencies:
-express, nodemon, mongodb, mongoose, jsonwebtoken, cookie-parser, cors, multer
+express, nodemon, mongodb, mongoose, bcrypt, jsonwebtoken, cookie-parser, cors, multer
 ### MONGODB Database
 The CRUD operations used to create (post), read (get), update (put) and delete (delete) the data from the database.
